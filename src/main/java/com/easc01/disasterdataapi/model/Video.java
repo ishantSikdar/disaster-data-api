@@ -1,14 +1,13 @@
-package com.easc01.disasterdataapi.models;
+package com.easc01.disasterdataapi.model;
 
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "picture")
-public class Picture {
-
+@Table(name = "video")
+public class Video {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long id;
+    private long id;
 
     private String url;
 
