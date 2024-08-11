@@ -1,13 +1,13 @@
-package com.easc01.disasterdataapi;
+package com.easc01.disastermediaapi;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DisasterDataApiApplication {
+public class DisasterMediaApiApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DisasterDataApiApplication.class, args);
+		SpringApplication.run(DisasterMediaApiApplication.class, args);
 	}
 
 }

@@ -1,4 +1,4 @@
-package com.easc01.disasterdataapi.model;
+package com.easc01.disastermediaapi.model;
 
 import jakarta.persistence.*;
 import lombok.Builder;

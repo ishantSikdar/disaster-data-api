@@ -1,6 +1,6 @@
-# Disaster Data API
+# Disaster Media API
 
-This repository contains the codebase for **disaster-data-api**, a real-time system designed to collect, process, and distribute media content related to natural disasters from social media platforms. The project features:
+This repository contains the codebase for **disaster-media-api**, a real-time system designed to collect, process, and distribute media content related to natural disasters from social media platforms. The project features:
 
 - **Real-Time Data Collection:** Integrates with social media APIs to gather posts, images, and videos tagged with disaster-related hashtags.
 - **Data Filtering and Storage:** Filters and stores relevant data in a database, ensuring timely access to critical information.

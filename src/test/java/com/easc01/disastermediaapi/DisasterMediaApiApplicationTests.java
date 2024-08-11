@@ -1,10 +1,10 @@
-package com.easc01.disasterdataapi;
+package com.easc01.disastermediaapi;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class DisasterDataApiApplicationTests {
+class DisasterMediaApiApplicationTests {
 
 	@Test
 	void contextLoads() {
