@@ -1,6 +1,6 @@
 package com.easc01.disastermediaapi.service.impl;
 
-import com.easc01.disastermediaapi.dto.disaster.ProcessedDisasterData;
+import com.easc01.disastermediaapi.dto.disaster.DisasterDataOpenAPIResponse;
 import com.easc01.disastermediaapi.service.DisasterService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -13,7 +13,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class DisasterServiceImpl implements DisasterService {
     @Override
-    public List<ProcessedDisasterData> getProcessedDisasterDataByParams(
+    public List<DisasterDataOpenAPIResponse> getProcessedDisasterDataByParams(
             String incidentType,
             String incidentLocation,
             String tags,

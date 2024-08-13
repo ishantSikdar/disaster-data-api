@@ -1,12 +1,16 @@
 package com.easc01.disastermediaapi.model;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.time.Instant;
 
 @Getter
 @Setter
 @Entity
+@Builder
 @Table(name = "video")
 public class Video {
     @Id
@@ -15,6 +19,7 @@ public class Video {
 
     private String url;
     private String userId;
+    private Instant publishedDate;
 
     @ManyToOne
     @JoinColumn(name = "disaster_id")

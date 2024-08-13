@@ -27,6 +27,8 @@ public class Disaster {
 
     private String title;
     private String summary;
+    private String incidentLocation;
+    private String incidentType;
 
     @OneToMany(mappedBy = "disaster", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Post> posts;    // description
@@ -36,8 +38,6 @@ public class Disaster {
 
     @OneToMany(mappedBy = "disaster", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Picture> pictures;  // none at the moment
-
-    private List<String> tags;    // hashtags
 
     @CreationTimestamp
     private Instant createdAt;

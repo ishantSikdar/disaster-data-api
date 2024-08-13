@@ -2,7 +2,7 @@ package com.easc01.disastermediaapi.controller;
 
 import com.easc01.disastermediaapi.constant.AppConstant;
 import com.easc01.disastermediaapi.dto.ApiResponse;
-import com.easc01.disastermediaapi.dto.disaster.ProcessedDisasterData;
+import com.easc01.disastermediaapi.dto.disaster.DisasterDataOpenAPIResponse;
 import com.easc01.disastermediaapi.service.DisasterService;
 import com.easc01.disastermediaapi.util.IDUtil;
 import lombok.RequiredArgsConstructor;
@@ -27,14 +27,14 @@ public class DisasterController {
     private final DisasterService disasterService;
 
     @GetMapping(value = AppConstant.ALL)
-    public ResponseEntity<ApiResponse<List<ProcessedDisasterData>>> getDisasterData(
+    public ResponseEntity<ApiResponse<List<DisasterDataOpenAPIResponse>>> getDisasterData(
             @RequestParam(name = "type") String incidentType,
             @RequestParam(name = "location") String incidentLocation,
             @RequestParam(name = "tags") String tags,
             @RequestParam(name = "publishedBefore") String publishedBefore,
             @RequestParam(name = "publishedAfter") String publishedAfter
     ) {
-        ApiResponse<List<ProcessedDisasterData>> apiResponse = new ApiResponse<>();
+        ApiResponse<List<DisasterDataOpenAPIResponse>> apiResponse = new ApiResponse<>();
         apiResponse.setRequestId(String.valueOf(IDUtil.generateHttpRequestId()));
 
         try {

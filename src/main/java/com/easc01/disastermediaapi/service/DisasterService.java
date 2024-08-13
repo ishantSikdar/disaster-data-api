@@ -1,12 +1,12 @@
 package com.easc01.disastermediaapi.service;
 
-import com.easc01.disastermediaapi.dto.disaster.ProcessedDisasterData;
+import com.easc01.disastermediaapi.dto.disaster.DisasterDataOpenAPIResponse;
 
 import java.util.List;
 
 public interface DisasterService {
 
-    List<ProcessedDisasterData> getProcessedDisasterDataByParams(
+    List<DisasterDataOpenAPIResponse> getProcessedDisasterDataByParams(
             String incidentType,
             String incidentLocation,
             String tags,

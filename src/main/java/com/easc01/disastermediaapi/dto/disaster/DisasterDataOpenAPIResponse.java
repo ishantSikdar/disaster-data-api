@@ -7,19 +7,19 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Date;
 import java.util.Set;
 
 @Getter
 @Setter
 @Builder
-public class ProcessedDisasterData {
-    private String id;
-    private String recordId;
+public class DisasterDataOpenAPIResponse {
+    private String disasterId;
     private String title;
     private String summary;
-    private String incidentLocation;
-    private String incidentType;
     private Set<Post> posts;
     private Set<Video> videos;
     private Set<Picture> pictures;
+    private String incidentLocation;
+    private Date infoPublishedDate;
 }
