@@ -1,0 +1,30 @@
+[2024-08-13T17:34:52.040+05:30] [c.e.d.DisasterMediaApiApplication] [main] [50] [INFO ] Starting DisasterMediaApiApplication using Java 17.0.10 with PID 16924 (C:\Users\ishan\OneDrive\Documents\Workspace\disaster-media-api\target\classes started by ishan in C:\Users\ishan\OneDrive\Documents\Workspace\disaster-media-api)
+[2024-08-13T17:34:52.044+05:30] [c.e.d.DisasterMediaApiApplication] [main] [51] [DEBUG] Running with Spring Boot v3.3.2, Spring v6.1.11
+[2024-08-13T17:34:52.045+05:30] [c.e.d.DisasterMediaApiApplication] [main] [654] [INFO ] No active profile set, falling back to 1 default profile: "default"
+[2024-08-13T17:35:31.993+05:30] [c.e.d.DisasterMediaApiApplication] [main] [50] [INFO ] Starting DisasterMediaApiApplication using Java 17.0.10 with PID 8000 (C:\Users\ishan\OneDrive\Documents\Workspace\disaster-media-api\target\classes started by ishan in C:\Users\ishan\OneDrive\Documents\Workspace\disaster-media-api)
+[2024-08-13T17:35:32.000+05:30] [c.e.d.DisasterMediaApiApplication] [main] [51] [DEBUG] Running with Spring Boot v3.3.2, Spring v6.1.11
+[2024-08-13T17:35:32.003+05:30] [c.e.d.DisasterMediaApiApplication] [main] [654] [INFO ] No active profile set, falling back to 1 default profile: "default"
+[2024-08-13T17:35:40.917+05:30] [c.e.d.DisasterMediaApiApplication] [main] [56] [INFO ] Started DisasterMediaApiApplication in 9.571 seconds (process running for 10.281)
+[2024-08-13T18:09:37.837+05:30] [c.e.d.DisasterMediaApiApplication] [main] [50] [INFO ] Starting DisasterMediaApiApplication using Java 17.0.10 with PID 8696 (C:\Users\ishan\OneDrive\Documents\Workspace\disaster-media-api\target\classes started by ishan in C:\Users\ishan\OneDrive\Documents\Workspace\disaster-media-api)
+[2024-08-13T18:09:37.845+05:30] [c.e.d.DisasterMediaApiApplication] [main] [51] [DEBUG] Running with Spring Boot v3.3.2, Spring v6.1.11
+[2024-08-13T18:09:37.847+05:30] [c.e.d.DisasterMediaApiApplication] [main] [654] [INFO ] No active profile set, falling back to 1 default profile: "default"
+[2024-08-13T18:09:47.189+05:30] [c.e.d.DisasterMediaApiApplication] [main] [56] [INFO ] Started DisasterMediaApiApplication in 9.945 seconds (process running for 10.802)
+[2024-08-13T18:10:41.364+05:30] [c.e.d.DisasterMediaApiApplication] [main] [50] [INFO ] Starting DisasterMediaApiApplication using Java 17.0.10 with PID 2460 (C:\Users\ishan\OneDrive\Documents\Workspace\disaster-media-api\target\classes started by ishan in C:\Users\ishan\OneDrive\Documents\Workspace\disaster-media-api)
+[2024-08-13T18:10:41.368+05:30] [c.e.d.DisasterMediaApiApplication] [main] [51] [DEBUG] Running with Spring Boot v3.3.2, Spring v6.1.11
+[2024-08-13T18:10:41.370+05:30] [c.e.d.DisasterMediaApiApplication] [main] [654] [INFO ] No active profile set, falling back to 1 default profile: "default"
+[2024-08-13T18:10:48.032+05:30] [c.e.d.DisasterMediaApiApplication] [main] [56] [INFO ] Started DisasterMediaApiApplication in 7.208 seconds (process running for 7.98)
+[2024-08-13T18:15:45.513+05:30] [c.e.d.DisasterMediaApiApplication] [main] [50] [INFO ] Starting DisasterMediaApiApplication using Java 17.0.10 with PID 13492 (C:\Users\ishan\OneDrive\Documents\Workspace\disaster-media-api\target\classes started by ishan in C:\Users\ishan\OneDrive\Documents\Workspace\disaster-media-api)
+[2024-08-13T18:15:45.514+05:30] [c.e.d.DisasterMediaApiApplication] [main] [51] [DEBUG] Running with Spring Boot v3.3.2, Spring v6.1.11
+[2024-08-13T18:15:45.516+05:30] [c.e.d.DisasterMediaApiApplication] [main] [654] [INFO ] No active profile set, falling back to 1 default profile: "default"
+[2024-08-13T18:15:52.296+05:30] [c.e.d.DisasterMediaApiApplication] [main] [56] [INFO ] Started DisasterMediaApiApplication in 7.321 seconds (process running for 8.066)
+[2024-08-13T18:17:57.956+05:30] [c.e.d.DisasterMediaApiApplication] [main] [50] [INFO ] Starting DisasterMediaApiApplication using Java 17.0.10 with PID 13384 (C:\Users\ishan\OneDrive\Documents\Workspace\disaster-media-api\target\classes started by ishan in C:\Users\ishan\OneDrive\Documents\Workspace\disaster-media-api)
+[2024-08-13T18:17:57.963+05:30] [c.e.d.DisasterMediaApiApplication] [main] [51] [DEBUG] Running with Spring Boot v3.3.2, Spring v6.1.11
+[2024-08-13T18:17:57.966+05:30] [c.e.d.DisasterMediaApiApplication] [main] [654] [INFO ] No active profile set, falling back to 1 default profile: "default"
+[2024-08-13T18:18:06.870+05:30] [c.e.d.DisasterMediaApiApplication] [main] [56] [INFO ] Started DisasterMediaApiApplication in 9.358 seconds (process running for 10.17)
+[2024-08-13T22:24:41.249+05:30] [c.e.d.DisasterMediaApiApplication] [main] [50] [INFO ] Starting DisasterMediaApiApplication using Java 17.0.10 with PID 16132 (C:\Users\ishan\OneDrive\Documents\Workspace\disaster-media-api\target\classes started by ishan in C:\Users\ishan\OneDrive\Documents\Workspace\disaster-media-api)
+[2024-08-13T22:24:41.252+05:30] [c.e.d.DisasterMediaApiApplication] [main] [51] [DEBUG] Running with Spring Boot v3.3.2, Spring v6.1.11
+[2024-08-13T22:24:41.252+05:30] [c.e.d.DisasterMediaApiApplication] [main] [654] [INFO ] No active profile set, falling back to 1 default profile: "default"
+[2024-08-13T22:26:48.300+05:30] [c.e.d.DisasterMediaApiApplication] [main] [50] [INFO ] Starting DisasterMediaApiApplication using Java 17.0.10 with PID 11560 (C:\Users\ishan\OneDrive\Documents\Workspace\disaster-media-api\target\classes started by ishan in C:\Users\ishan\OneDrive\Documents\Workspace\disaster-media-api)
+[2024-08-13T22:26:48.304+05:30] [c.e.d.DisasterMediaApiApplication] [main] [51] [DEBUG] Running with Spring Boot v3.3.2, Spring v6.1.11
+[2024-08-13T22:26:48.305+05:30] [c.e.d.DisasterMediaApiApplication] [main] [654] [INFO ] No active profile set, falling back to 1 default profile: "default"
+[2024-08-13T22:26:53.943+05:30] [c.e.d.DisasterMediaApiApplication] [main] [56] [INFO ] Started DisasterMediaApiApplication in 6.08 seconds (process running for 6.698)

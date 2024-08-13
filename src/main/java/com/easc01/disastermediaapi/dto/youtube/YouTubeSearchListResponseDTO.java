@@ -60,14 +60,14 @@ public class YouTubeSearchListResponseDTO {
             @Builder
             public static class Thumbnails {
                 @JsonProperty("default")
-                private VideoThumbnailSize defaultThumbnail;
-                private VideoThumbnailSize medium;
-                private VideoThumbnailSize high;
+                private VideoThumbnail defaultThumbnail;
+                private VideoThumbnail medium;
+                private VideoThumbnail high;
 
                 @Getter
                 @Setter
                 @Builder
-                public static class VideoThumbnailSize {
+                public static class VideoThumbnail {
                     private String url;
                     private int width;
                     private int height;

@@ -4,6 +4,7 @@ import com.easc01.disastermediaapi.constant.AppConstant;
 import com.easc01.disastermediaapi.dto.ApiResponse;
 import com.easc01.disastermediaapi.dto.youtube.YouTubeSearchListResponseDTO;
 import com.easc01.disastermediaapi.service.YouTubeService;
+import com.easc01.disastermediaapi.util.IDUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -18,20 +19,19 @@ import java.util.Date;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(path = AppConstant.API)
-public class DisasterStreamController {
+@RequestMapping(path = AppConstant.API + AppConstant.YOUTUBE)
+public class YouTubeController {
 
     private final YouTubeService youTubeService;
 
-    @GetMapping(value = "/testYouTube")
+    @GetMapping(value = AppConstant.RECENT)
     public ResponseEntity<ApiResponse<YouTubeSearchListResponseDTO>> getDisasters() {
         ApiResponse<YouTubeSearchListResponseDTO> apiResponse = new ApiResponse<>();
-        apiResponse.setRequestId("!");
+        apiResponse.setRequestId(String.valueOf(IDUtil.generateHttpRequestId()));
 
         try {
-            YouTubeSearchListResponseDTO disasters = youTubeService.fetchRecentNaturalDisastersPosts();
-            apiResponse.setData(disasters);
-            apiResponse.setMessage("Disaster Details Fetched");
+            apiResponse.setData(youTubeService.fetchRecentNaturalDisastersPosts());
+            apiResponse.setMessage("Recent YouTube Disaster Details Fetched");
             apiResponse.setHttpStatus(HttpStatus.OK);
 
         } catch (Exception e) {

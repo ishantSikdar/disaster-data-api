@@ -22,21 +22,22 @@ public class Disaster {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
+    @Column(unique = true)
+    private String recordId;
+
     private String title;
     private String summary;
 
     @OneToMany(mappedBy = "disaster", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Post> posts;
+    private Set<Post> posts;    // description
 
     @OneToMany(mappedBy = "disaster", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Video> videos;
+    private Set<Video> videos;  // video url
 
     @OneToMany(mappedBy = "disaster", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Picture> pictures;
+    private Set<Picture> pictures;  // none at the moment
 
-    private List<String> tags;
-    private List<String> postIds;
-    private List<String> byUsers;
+    private List<String> tags;    // hashtags
 
     @CreationTimestamp
     private Instant createdAt;
