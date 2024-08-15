@@ -9,7 +9,6 @@ public interface DisasterService {
     List<DisasterDataOpenAPIResponse> getProcessedDisasterDataByParams(
             String incidentType,
             String incidentLocation,
-            String tags,
             String publishedBefore,
             String publishedAfter
     );

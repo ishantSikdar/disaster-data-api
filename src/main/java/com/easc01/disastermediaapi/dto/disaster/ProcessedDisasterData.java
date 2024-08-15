@@ -1,7 +1,5 @@
 package com.easc01.disastermediaapi.dto.disaster;
 
-import com.easc01.disastermediaapi.model.Picture;
-import com.easc01.disastermediaapi.model.Post;
 import com.easc01.disastermediaapi.model.Video;
 import lombok.Builder;
 import lombok.Getter;
@@ -19,7 +17,5 @@ public class ProcessedDisasterData {
     private String summary;
     private String incidentLocation;
     private String incidentType;
-    private Set<Post> posts;
     private Set<Video> videos;
-    private Set<Picture> pictures;
 }

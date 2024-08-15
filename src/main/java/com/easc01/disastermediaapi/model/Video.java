@@ -18,6 +18,7 @@ public class Video {
     private long id;
 
     private String url;
+    private String description;
     private String userId;
     private Instant publishedDate;
 

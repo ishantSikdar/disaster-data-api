@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.easc01</groupId>
-	<artifactId>disaster-data-api</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>Disaster Data API</name>
+	<artifactId>disaster-media-api</artifactId>
+	<version>1.0</version>
+	<name>Disaster Media API</name>
 	<description>Real-time system for collecting, processing, and distributing disaster-related media from social media platforms.</description>
 	<url/>
 	<licenses>
@@ -38,10 +38,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-mail</artifactId>
 		</dependency>
-<!--		<dependency>-->
-<!--			<groupId>org.springframework.boot</groupId>-->
-<!--			<artifactId>spring-boot-starter-security</artifactId>-->
-<!--		</dependency>-->
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -72,12 +69,6 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-<!--		<dependency>-->
-<!--			<groupId>org.springframework.security</groupId>-->
-<!--			<artifactId>spring-security-test</artifactId>-->
-<!--			<scope>test</scope>-->
-<!--		</dependency>-->
-
 		<dependency>
 			<groupId>io.github.takke</groupId>
 			<artifactId>jp.takke.twitter4j-v2</artifactId>
@@ -97,6 +88,12 @@
 			<version>2.17.1</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+			<version>2.6.0</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -105,6 +102,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
+					<finalName>disaster-media-api</finalName>
 					<excludes>
 						<exclude>
 							<groupId>org.projectlombok</groupId>

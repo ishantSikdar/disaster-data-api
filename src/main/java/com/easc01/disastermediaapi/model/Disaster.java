@@ -30,15 +30,10 @@ public class Disaster {
     private String incidentLocation;
     private String incidentType;
 
-    @OneToMany(mappedBy = "disaster", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Post> posts;    // description
-
-    @OneToMany(mappedBy = "disaster", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "disaster", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private Set<Video> videos;  // video url
-
-    @OneToMany(mappedBy = "disaster", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Picture> pictures;  // none at the moment
 
     @CreationTimestamp
     private Instant createdAt;
+    private Instant updatedAt;
 }

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.List;
 
@@ -27,10 +28,9 @@ public class DisasterController {
     private final DisasterService disasterService;
 
     @GetMapping(value = AppConstant.ALL)
-    public ResponseEntity<ApiResponse<List<DisasterDataOpenAPIResponse>>> getDisasterData(
+    public ResponseEntity<ApiResponse<List<DisasterDataOpenAPIResponse>>> getAllDisasterData(
             @RequestParam(name = "type") String incidentType,
             @RequestParam(name = "location") String incidentLocation,
-            @RequestParam(name = "tags") String tags,
             @RequestParam(name = "publishedBefore") String publishedBefore,
             @RequestParam(name = "publishedAfter") String publishedAfter
     ) {
@@ -42,7 +42,6 @@ public class DisasterController {
                     disasterService.getProcessedDisasterDataByParams(
                             incidentType,
                             incidentLocation,
-                            tags,
                             publishedBefore,
                             publishedAfter
                     )
@@ -60,6 +59,38 @@ public class DisasterController {
         apiResponse.setTimestamp(Date.from(Instant.now()));
         return new ResponseEntity<>(apiResponse, apiResponse.getHttpStatus());
     }
+
+    @GetMapping(value = AppConstant.RECENT)
+    public ResponseEntity<ApiResponse<List<DisasterDataOpenAPIResponse>>> getRecentDisasterData(
+            @RequestParam(name = "type") String incidentType,
+            @RequestParam(name = "location") String incidentLocation
+    ) {
+        ApiResponse<List<DisasterDataOpenAPIResponse>> apiResponse = new ApiResponse<>();
+        apiResponse.setRequestId(String.valueOf(IDUtil.generateHttpRequestId()));
+
+        try {
+            apiResponse.setData(
+                    disasterService.getProcessedDisasterDataByParams(
+                            incidentType,
+                            incidentLocation,
+                            String.valueOf(Instant.now()),
+                            String.valueOf(Instant.now().minus(15, ChronoUnit.MINUTES))
+                    )
+            );
+            apiResponse.setHttpStatus(HttpStatus.OK);
+            apiResponse.setMessage("Fetched Recent Disaster Data");
+
+        } catch (Exception e) {
+            log.error("Failed to fetch recent disaster data");
+            apiResponse.setMessage("Failed to fetch recent disaster data");
+            apiResponse.setHttpStatus(HttpStatus.INTERNAL_SERVER_ERROR);
+
+        }
+
+        apiResponse.setTimestamp(Date.from(Instant.now()));
+        return new ResponseEntity<>(apiResponse, apiResponse.getHttpStatus());
+    }
+
 
 
 }
