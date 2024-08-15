@@ -2,17 +2,19 @@ package com.easc01.disastermediaapi.controller;
 
 import com.easc01.disastermediaapi.constant.AppConstant;
 import com.easc01.disastermediaapi.dto.ApiResponse;
-import com.easc01.disastermediaapi.dto.disaster.DisasterDataOpenAPIResponse;
-import com.easc01.disastermediaapi.model.Disaster;
-import com.easc01.disastermediaapi.model.Video;
-import com.easc01.disastermediaapi.repository.DisasterRepository;
+import com.easc01.disastermediaapi.dto.disaster.DisasterData;
 import com.easc01.disastermediaapi.service.DisasterService;
 import com.easc01.disastermediaapi.util.IDUtil;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
@@ -22,26 +24,28 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
+@Tag(name = "Disasters", description = "Following endpoints response with natural disaster data.")
 @RequestMapping(path = AppConstant.DISASTER)
 public class DisasterController {
 
     private final DisasterService disasterService;
 
     @GetMapping(value = AppConstant.ALL)
-    public ResponseEntity<ApiResponse<List<DisasterDataOpenAPIResponse>>> getAllDisasterData(
+    @Operation(description = "Returns natural disasters from the entire archive by certain criteria, leave params blank to ignore.")
+    public ResponseEntity<ApiResponse<List<DisasterData>>> getAllDisasterData(
             @RequestParam(name = "type") String type,
             @RequestParam(name = "location") String location,
             @RequestParam(name = "publishedBefore") String publishedBefore,
             @RequestParam(name = "publishedAfter") String publishedAfter
     ) {
-        ApiResponse<List<DisasterDataOpenAPIResponse>> apiResponse = new ApiResponse<>();
+        ApiResponse<List<DisasterData>> apiResponse = new ApiResponse<>();
         apiResponse.setRequestId(String.valueOf(IDUtil.generateHttpRequestId()));
 
         try {
             apiResponse.setData(
                     disasterService.getProcessedDisasterDataByCriteria(
-                            type,
-                            location,
+                            type.trim(),
+                            location.trim(),
                             publishedBefore.isBlank() ? String.valueOf(Instant.now()) : publishedBefore,
                             publishedAfter.isBlank() ? String.valueOf(Instant.EPOCH) : publishedAfter
                     )
@@ -61,18 +65,19 @@ public class DisasterController {
     }
 
     @GetMapping(value = AppConstant.RECENT)
-    public ResponseEntity<ApiResponse<List<DisasterDataOpenAPIResponse>>> getRecentDisasterData(
+    @Operation(description = "Returns natural disasters that were broadcast in the past 15 minutes")
+    public ResponseEntity<ApiResponse<List<DisasterData>>> getRecentDisasterData(
             @RequestParam(name = "type") String type,
             @RequestParam(name = "location") String location
     ) {
-        ApiResponse<List<DisasterDataOpenAPIResponse>> apiResponse = new ApiResponse<>();
+        ApiResponse<List<DisasterData>> apiResponse = new ApiResponse<>();
         apiResponse.setRequestId(String.valueOf(IDUtil.generateHttpRequestId()));
 
         try {
             apiResponse.setData(
                     disasterService.getProcessedDisasterDataByCriteria(
-                            type,
-                            location,
+                            type.trim(),
+                            location.trim(),
                             String.valueOf(Instant.now()),
                             String.valueOf(Instant.now().minus(15, ChronoUnit.MINUTES))
                     )

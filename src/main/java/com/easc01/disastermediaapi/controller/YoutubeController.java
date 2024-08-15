@@ -5,6 +5,9 @@ import com.easc01.disastermediaapi.dto.ApiResponse;
 import com.easc01.disastermediaapi.dto.youtube.YouTubeSearchListResponseDTO;
 import com.easc01.disastermediaapi.service.YouTubeService;
 import com.easc01.disastermediaapi.util.IDUtil;
+import io.swagger.v3.oas.annotations.Hidden;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -17,6 +20,7 @@ import java.time.Instant;
 import java.util.Date;
 
 @Slf4j
+@Hidden
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(path = AppConstant.YOUTUBE)

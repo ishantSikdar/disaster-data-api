@@ -1,6 +1,7 @@
 package com.easc01.disastermediaapi.service.impl;
 
-import com.easc01.disastermediaapi.dto.disaster.DisasterDataOpenAPIResponse;
+import com.easc01.disastermediaapi.dto.disaster.DisasterData;
+import com.easc01.disastermediaapi.dto.disaster.VideoData;
 import com.easc01.disastermediaapi.model.Disaster;
 import com.easc01.disastermediaapi.repository.DisasterRepository;
 import com.easc01.disastermediaapi.service.DisasterService;
@@ -20,7 +21,7 @@ public class DisasterServiceImpl implements DisasterService {
     private final DisasterRepository disasterRepository;
 
     @Override
-    public List<DisasterDataOpenAPIResponse> getProcessedDisasterDataByCriteria(
+    public List<DisasterData> getProcessedDisasterDataByCriteria(
             String incidentType,
             String incidentLocation,
             String publishedBefore,
@@ -32,19 +33,24 @@ public class DisasterServiceImpl implements DisasterService {
                 Instant.parse(publishedAfter),
                 Instant.parse(publishedBefore)
         );
-        log.info("Number of disasters found: {}", disasters.size());
-
 
         // Map disasters to response objects
         return disasters.parallelStream()
-                .map(disaster -> DisasterDataOpenAPIResponse.builder()
+                .map(disaster -> DisasterData.builder()
                         .disasterId(disaster.getRecordId())
                         .title(disaster.getTitle())
                         .summary(disaster.getSummary())
-                        .videos(disaster.getVideos())
+                        .videos(disaster.getVideos().stream()
+                                .map((video) -> VideoData.builder()
+                                        .title(video.getTitle())
+                                        .description(video.getDescription())
+                                        .url(video.getUrl())
+                                        .publishedDate(video.getPublishedDate())
+                                        .build())
+                                .toList())
                         .incidentLocation(disaster.getIncidentLocation())
                         .incidentType(disaster.getIncidentType())
-                        .infoPublishedDate(Date.from(disaster.getCreatedAt()))
+                        .infoPublishedDate(Date.from(disaster.getUpdatedAt()))
                         .build())
                 .toList();
     }

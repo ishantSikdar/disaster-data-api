@@ -4,6 +4,7 @@ import com.easc01.disastermediaapi.constant.AppConstant;
 import com.easc01.disastermediaapi.model.Disaster;
 import com.easc01.disastermediaapi.model.Video;
 import com.easc01.disastermediaapi.repository.DisasterRepository;
+import io.swagger.v3.oas.annotations.Hidden;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.Set;
 
 @Slf4j
+@Hidden
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(path = AppConstant.SEED)
