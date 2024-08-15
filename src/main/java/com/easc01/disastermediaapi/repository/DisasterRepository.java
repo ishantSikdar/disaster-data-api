@@ -13,18 +13,24 @@ import java.util.Optional;
 @Repository
 public interface DisasterRepository extends JpaRepository<Disaster, Long> {
 
+    @Query("SELECT d FROM Disaster d LEFT JOIN FETCH d.videos")
+    List<Disaster> findAllWithVideos();
+
     @Query("SELECT d FROM Disaster d WHERE d.recordId = :recordId")
     Optional<Disaster> findByRecordId(@Param("recordId") String recordId);
 
     @Query("SELECT DISTINCT d FROM Disaster d " +
-            "JOIN d.videos v " +
-            "WHERE (:incidentType IS NULL OR LOWER(d.incidentType) = LOWER(:incidentType)) " +
-            "AND (:incidentLocation IS NULL OR LOWER(d.incidentLocation) = LOWER(:incidentLocation)) " +
-            "AND (:startDate IS NULL OR :endDate IS NULL OR v.publishedDate BETWEEN :startDate AND :endDate)")
+            "JOIN FETCH d.videos v " +
+            "WHERE (:type = '' OR LOWER(d.incidentType) LIKE LOWER(CONCAT('%', :type, '%'))) " +
+            "AND (:location = '' OR LOWER(d.incidentLocation) LIKE LOWER(CONCAT('%', :location, '%'))) " +
+            "AND v.publishedDate BETWEEN :startDate AND :endDate " +
+            "ORDER BY d.updatedAt")
     List<Disaster> findDisastersByCriteria(
-            @Param("incidentType") String incidentType,
-            @Param("incidentLocation") String incidentLocation,
+            @Param("type") String type,
+            @Param("location") String location,
             @Param("startDate") Instant startDate,
             @Param("endDate") Instant endDate
     );
+
+
 }

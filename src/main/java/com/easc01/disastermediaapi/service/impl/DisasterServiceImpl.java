@@ -20,29 +20,24 @@ public class DisasterServiceImpl implements DisasterService {
     private final DisasterRepository disasterRepository;
 
     @Override
-    public List<DisasterDataOpenAPIResponse> getProcessedDisasterDataByParams(
+    public List<DisasterDataOpenAPIResponse> getProcessedDisasterDataByCriteria(
             String incidentType,
             String incidentLocation,
             String publishedBefore,
             String publishedAfter
     ) {
-        if (incidentType != null && incidentType.trim().isEmpty()) {
-            incidentType = null;
-        }
-
-        if (incidentLocation != null && incidentLocation.trim().isEmpty()) {
-            incidentLocation = null;
-        }
-
         List<Disaster> disasters = disasterRepository.findDisastersByCriteria(
-                incidentType,
-                incidentLocation,
+                incidentType.toLowerCase(),
+                incidentLocation.toLowerCase(),
                 Instant.parse(publishedAfter),
                 Instant.parse(publishedBefore)
         );
+        log.info("Number of disasters found: {}", disasters.size());
 
+
+        // Map disasters to response objects
         return disasters.parallelStream()
-                .map((disaster -> DisasterDataOpenAPIResponse.builder()
+                .map(disaster -> DisasterDataOpenAPIResponse.builder()
                         .disasterId(disaster.getRecordId())
                         .title(disaster.getTitle())
                         .summary(disaster.getSummary())
@@ -50,7 +45,11 @@ public class DisasterServiceImpl implements DisasterService {
                         .incidentLocation(disaster.getIncidentLocation())
                         .incidentType(disaster.getIncidentType())
                         .infoPublishedDate(Date.from(disaster.getCreatedAt()))
-                        .build()))
+                        .build())
                 .toList();
     }
+
+
+
+
 }

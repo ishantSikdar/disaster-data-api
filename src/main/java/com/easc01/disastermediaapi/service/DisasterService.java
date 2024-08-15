@@ -6,11 +6,12 @@ import java.util.List;
 
 public interface DisasterService {
 
-    List<DisasterDataOpenAPIResponse> getProcessedDisasterDataByParams(
+    List<DisasterDataOpenAPIResponse> getProcessedDisasterDataByCriteria(
             String incidentType,
             String incidentLocation,
             String publishedBefore,
             String publishedAfter
     );
+
 
 }

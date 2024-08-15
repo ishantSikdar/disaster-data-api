@@ -1,11 +1,10 @@
 package com.easc01.disastermediaapi.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.Instant;
 import java.util.List;
@@ -16,6 +15,8 @@ import java.util.Set;
 @Builder
 @Entity
 @Table(name = "disaster")
+@NoArgsConstructor
+@AllArgsConstructor
 public class Disaster {
 
     @Id
@@ -26,14 +27,19 @@ public class Disaster {
     private String recordId;
 
     private String title;
+
+    @Column(length = 5000)
     private String summary;
     private String incidentLocation;
     private String incidentType;
 
-    @OneToMany(mappedBy = "disaster", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    private Set<Video> videos;  // video url
+    @JsonManagedReference
+    @OneToMany(mappedBy = "disaster", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Video> videos;
 
     @CreationTimestamp
     private Instant createdAt;
+
+    @UpdateTimestamp
     private Instant updatedAt;
 }

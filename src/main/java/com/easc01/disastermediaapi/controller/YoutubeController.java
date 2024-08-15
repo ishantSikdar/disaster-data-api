@@ -19,8 +19,8 @@ import java.util.Date;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(path = AppConstant.API + AppConstant.YOUTUBE)
-public class YouTubeController {
+@RequestMapping(path = AppConstant.YOUTUBE)
+public class YoutubeController {
 
     private final YouTubeService youTubeService;
 

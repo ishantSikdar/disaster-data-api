@@ -79,6 +79,7 @@ public class DisasterSchedulerServiceImpl implements DisasterSchedulerService {
                         AIProcessedDisaster aiProcessedDisaster = currentAIProcessedData.get();
                         Set<Video> videos = Set.of(
                                 Video.builder()
+                                        .title(disasterItem.getSnippet().getTitle())
                                         .userId(disasterItem.getSnippet().getChannelId())
                                         .url("https://www.youtube.com/watch?v=" + disasterItem.getId().getVideoId())
                                         .description(disasterItem.getSnippet().getDescription())
@@ -134,7 +135,6 @@ public class DisasterSchedulerServiceImpl implements DisasterSchedulerService {
 
             } else {
                 similarDisaster.get().getVideos().addAll(mappedDisaster.getVideos());
-                similarDisaster.get().setUpdatedAt(Instant.now());
                 return similarDisaster.get();
 
             }
