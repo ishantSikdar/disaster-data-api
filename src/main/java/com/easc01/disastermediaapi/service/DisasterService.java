@@ -7,6 +7,7 @@ import java.util.List;
 public interface DisasterService {
 
     List<DisasterData> getProcessedDisasterDataByCriteria(
+            String searchTag,
             String incidentType,
             String incidentLocation,
             String publishedBefore,

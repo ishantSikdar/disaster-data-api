@@ -22,12 +22,14 @@ public class DisasterServiceImpl implements DisasterService {
 
     @Override
     public List<DisasterData> getProcessedDisasterDataByCriteria(
+            String searchTag,
             String incidentType,
             String incidentLocation,
             String publishedBefore,
             String publishedAfter
     ) {
         List<Disaster> disasters = disasterRepository.findDisastersByCriteria(
+                searchTag.toLowerCase(),
                 incidentType.toLowerCase(),
                 incidentLocation.toLowerCase(),
                 Instant.parse(publishedAfter),

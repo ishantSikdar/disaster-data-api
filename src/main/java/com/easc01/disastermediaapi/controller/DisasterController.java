@@ -33,6 +33,7 @@ public class DisasterController {
     @GetMapping(value = AppConstant.ALL)
     @Operation(description = "Returns natural disasters from the entire archive by certain criteria, leave params blank to ignore.")
     public ResponseEntity<ApiResponse<List<DisasterData>>> getAllDisasterData(
+            @RequestParam(name = "searchTag") String searchTag,
             @RequestParam(name = "type") String type,
             @RequestParam(name = "location") String location,
             @RequestParam(name = "publishedBefore") String publishedBefore,
@@ -44,6 +45,7 @@ public class DisasterController {
         try {
             apiResponse.setData(
                     disasterService.getProcessedDisasterDataByCriteria(
+                            searchTag.trim(),
                             type.trim(),
                             location.trim(),
                             publishedBefore.isBlank() ? String.valueOf(Instant.now()) : publishedBefore,
@@ -67,6 +69,7 @@ public class DisasterController {
     @GetMapping(value = AppConstant.RECENT)
     @Operation(description = "Returns natural disasters that were broadcast in the past 15 minutes")
     public ResponseEntity<ApiResponse<List<DisasterData>>> getRecentDisasterData(
+            @RequestParam(name = "searchTag") String searchTag,
             @RequestParam(name = "type") String type,
             @RequestParam(name = "location") String location
     ) {
@@ -76,6 +79,7 @@ public class DisasterController {
         try {
             apiResponse.setData(
                     disasterService.getProcessedDisasterDataByCriteria(
+                            searchTag.trim(),
                             type.trim(),
                             location.trim(),
                             String.valueOf(Instant.now()),

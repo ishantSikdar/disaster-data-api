@@ -21,11 +21,14 @@ public interface DisasterRepository extends JpaRepository<Disaster, Long> {
 
     @Query("SELECT DISTINCT d FROM Disaster d " +
             "JOIN FETCH d.videos v " +
-            "WHERE (:type = '' OR LOWER(d.incidentType) LIKE LOWER(CONCAT('%', :type, '%'))) " +
+            "WHERE (:searchTag = '' OR LOWER(d.title) LIKE LOWER(CONCAT('%', :searchTag, '%')) " +
+            "OR LOWER(d.summary) LIKE LOWER(CONCAT('%', :searchTag, '%'))) " +
+            "AND (:type = '' OR LOWER(d.incidentType) LIKE LOWER(CONCAT('%', :type, '%'))) " +
             "AND (:location = '' OR LOWER(d.incidentLocation) LIKE LOWER(CONCAT('%', :location, '%'))) " +
             "AND v.publishedDate BETWEEN :startDate AND :endDate " +
             "ORDER BY d.updatedAt")
     List<Disaster> findDisastersByCriteria(
+            @Param("searchTag") String searchTag,
             @Param("type") String type,
             @Param("location") String location,
             @Param("startDate") Instant startDate,
