@@ -9,4 +9,4 @@ This repository contains the codebase for **disaster-media-api**, a real-time sy
 
 The system supports disaster response and recovery efforts by delivering real-time updates and insights from affected areas, aiding in situational awareness and decision-making.
 
-(Excalidraw)[https://excalidraw.com/#json=WzcydY09aYlDDMwaZcssH,t55c_-bJFZ1LemDNhL0rpg]
+[Excalidraw](https://excalidraw.com/#json=WzcydY09aYlDDMwaZcssH,t55c_-bJFZ1LemDNhL0rpg)
