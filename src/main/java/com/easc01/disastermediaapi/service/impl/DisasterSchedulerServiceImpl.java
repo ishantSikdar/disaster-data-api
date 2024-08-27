@@ -24,7 +24,6 @@ public class DisasterSchedulerServiceImpl implements DisasterSchedulerService {
 
     private final YouTubeService youTubeService;
     private final GenerativeAIService generativeAIService;
-
     private final DisasterRepository disasterRepository;
 
     @Override
@@ -82,6 +81,7 @@ public class DisasterSchedulerServiceImpl implements DisasterSchedulerService {
                                         .title(disasterItem.getSnippet().getTitle())
                                         .userId(disasterItem.getSnippet().getChannelId())
                                         .url("https://www.youtube.com/watch?v=" + disasterItem.getId().getVideoId())
+                                        .thumbnail(disasterItem.getSnippet().getThumbnails().getMedium().getUrl())
                                         .description(disasterItem.getSnippet().getDescription())
                                         .publishedDate(Instant.parse(disasterItem.getSnippet().getPublishedAt()))
                                         .build()

@@ -20,6 +20,7 @@ public class Video {
 
     private String title;
     private String url;
+    private String thumbnail;
 
     @Column(length = 5000)
     private String description;

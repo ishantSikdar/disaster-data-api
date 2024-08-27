@@ -13,6 +13,5 @@ public class AIProcessedDisaster {
     private String summary;
     private String location;
     private String incidentType;
-    private String verified;
     private String disasterId;
 }
