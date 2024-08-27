@@ -16,8 +16,8 @@ public interface DisasterRepository extends JpaRepository<Disaster, Long> {
     @Query("SELECT d FROM Disaster d LEFT JOIN FETCH d.videos")
     List<Disaster> findAllWithVideos();
 
-    @Query("SELECT d FROM Disaster d WHERE d.recordId = :recordId")
-    Optional<Disaster> findByRecordId(@Param("recordId") String recordId);
+    @Query("SELECT d FROM Disaster d LEFT JOIN FETCH d.videos WHERE d.recordId = :recordId")
+    Optional<Disaster> findByRecordIdWithVideos(@Param("recordId") String recordId);
 
     @Query("SELECT DISTINCT d FROM Disaster d " +
             "JOIN FETCH d.videos v " +

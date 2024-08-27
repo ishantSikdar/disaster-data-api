@@ -132,7 +132,7 @@ public class DisasterSchedulerServiceImpl implements DisasterSchedulerService {
     private Disaster serializeDuplicateDisaster(ProcessedDisasterData mappedDisaster) {
         try {
             log.info("Processing record id{} : ", mappedDisaster.getRecordId());
-            Optional<Disaster> similarDisaster = disasterRepository.findByRecordId(mappedDisaster.getRecordId());
+            Optional<Disaster> similarDisaster = disasterRepository.findByRecordIdWithVideos(mappedDisaster.getRecordId());
 
             if (similarDisaster.isEmpty()) {
                 Disaster newDisaster = Disaster.builder()
