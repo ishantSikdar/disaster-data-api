@@ -26,7 +26,7 @@ public interface DisasterRepository extends JpaRepository<Disaster, Long> {
             "AND (:type = '' OR LOWER(d.incidentType) LIKE LOWER(CONCAT('%', :type, '%'))) " +
             "AND (:location = '' OR LOWER(d.incidentLocation) LIKE LOWER(CONCAT('%', :location, '%'))) " +
             "AND v.publishedDate BETWEEN :startDate AND :endDate " +
-            "ORDER BY d.updatedAt")
+            "ORDER BY d.updatedAt DESC")
     List<Disaster> findDisastersByCriteria(
             @Param("searchTag") String searchTag,
             @Param("type") String type,

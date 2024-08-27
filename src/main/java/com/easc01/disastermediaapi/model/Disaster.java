@@ -23,7 +23,6 @@ public class Disaster {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    @Column(unique = true)
     private String recordId;
 
     private String title;
