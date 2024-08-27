@@ -54,7 +54,17 @@ public class GenerativeAIServiceImpl implements GenerativeAIService {
                 JavaType listType = objectMapper.getTypeFactory()
                         .constructCollectionType(List.class, AIProcessedDisaster.class);
 
-                return objectMapper.readValue(responseBody, listType);
+                List<AIProcessedDisaster> aiProcessedDisasters = objectMapper.readValue(responseBody, listType);
+                List<AIProcessedDisaster> filterDisasters = aiProcessedDisasters.stream()
+                        .filter((data) -> data.getId() != null && data.getSummary() != null && data.getTitle() != null && data.getDisasterId() != null)
+                        .toList();
+
+                log.info("AI Processed Disasters -:");
+                for (AIProcessedDisaster disaster : filterDisasters) {
+                    log.info(disaster.toString());
+                }
+
+                return filterDisasters;
 
             } else {
                 log.error("Request failed with status code: {}", response.code());

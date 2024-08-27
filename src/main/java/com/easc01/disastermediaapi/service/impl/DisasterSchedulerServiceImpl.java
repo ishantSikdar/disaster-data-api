@@ -153,7 +153,7 @@ public class DisasterSchedulerServiceImpl implements DisasterSchedulerService {
                 disaster.setVideos(mappedDisaster.getVideos());
 
             } else {
-                disaster.setSummary(mappedDisaster.getSummary() + "\n" +  disaster.getSummary());
+                disaster.setSummary(mappedDisaster.getSummary() + "\n\n" +  disaster.getSummary());
                 disaster.setIncidentLocation(mappedDisaster.getIncidentLocation());
                 disaster.setIncidentType(mappedDisaster.getIncidentType());
                 disaster.getVideos().addAll(mappedDisaster.getVideos());
