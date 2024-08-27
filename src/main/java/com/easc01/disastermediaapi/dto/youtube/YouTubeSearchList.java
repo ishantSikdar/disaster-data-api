@@ -1,5 +1,6 @@
 package com.easc01.disastermediaapi.dto.youtube;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Getter;
@@ -10,7 +11,7 @@ import java.util.List;
 @Getter
 @Setter
 @Builder
-public class YouTubeSearchListResponseDTO {
+public class YouTubeSearchList {
     private String kind;
     private String etag;
     private String regionCode;
@@ -52,8 +53,11 @@ public class YouTubeSearchListResponseDTO {
             private String description;
             private Thumbnails thumbnails;
             private String channelTitle;
+            private List<String> tags;
+            private String categoryId;
             private String liveBroadcastContent;
-            private String publishTime;
+            private String defaultLanguage;
+            private String defaultAudioLanguage;
 
             @Getter
             @Setter
@@ -63,6 +67,8 @@ public class YouTubeSearchListResponseDTO {
                 private VideoThumbnail defaultThumbnail;
                 private VideoThumbnail medium;
                 private VideoThumbnail high;
+                private VideoThumbnail standard;
+                private VideoThumbnail maxres;
 
                 @Getter
                 @Setter

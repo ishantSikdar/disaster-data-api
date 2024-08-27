@@ -3,7 +3,7 @@ package com.easc01.disastermediaapi.service.impl;
 import com.easc01.disastermediaapi.dto.disaster.ProcessedDisasterData;
 import com.easc01.disastermediaapi.dto.generativeai.AIProcessedDisaster;
 import com.easc01.disastermediaapi.dto.generativeai.RawDisasterData;
-import com.easc01.disastermediaapi.dto.youtube.YouTubeSearchListResponseDTO;
+import com.easc01.disastermediaapi.dto.youtube.YouTubeSearchList;
 import com.easc01.disastermediaapi.model.Disaster;
 import com.easc01.disastermediaapi.model.Video;
 import com.easc01.disastermediaapi.repository.DisasterRepository;
@@ -27,17 +27,23 @@ public class DisasterSchedulerServiceImpl implements DisasterSchedulerService {
     private final DisasterRepository disasterRepository;
 
     @Override
-    public void collectAndSaveDisastersFromYouTube() {
+    public double collectAndSaveDisastersFromYouTube() {
+        long startTime = System.currentTimeMillis();
+
         try {
             // Step 1: collection
-            YouTubeSearchListResponseDTO youtubeDisasterData = youTubeService.fetchRecentNaturalDisastersPosts();
+            YouTubeSearchList youtubeDisasterData = youTubeService.fetchRecentNaturalDisastersPosts();
             // sub step 1: serialize result
             List<RawDisasterData> rawDisasterData = serializeYouTubeResults(youtubeDisasterData.getItems());
+            log.info("Number of raw disasters scrapped: {}", rawDisasterData.size());
 
             // Step 2: AI procession
             List<AIProcessedDisaster> aiProcessedData = generativeAIService.processRawDisasterData(rawDisasterData);
+            log.info("Number of raw disasters processed using AI: {}", aiProcessedData.size());
+
             // sub step 2: map AI processed data with original data
             List<ProcessedDisasterData> mappedDisasterData = mapAIProcessedDataWithOriginal(youtubeDisasterData.getItems(), aiProcessedData);
+            log.info("Number of processed mapped disasters remains: {}", mappedDisasterData.size());
 
             // Step 3: Save mapped and processed disasters
             boolean success = saveProcessAndMappedDisasters(mappedDisasterData);
@@ -49,20 +55,21 @@ public class DisasterSchedulerServiceImpl implements DisasterSchedulerService {
 
         }
 
+        return (double) (System.currentTimeMillis() - startTime) / 1000;
     }
 
-    private List<RawDisasterData> serializeYouTubeResults(List<YouTubeSearchListResponseDTO.SearchResult> disasterData) {
+    private List<RawDisasterData> serializeYouTubeResults(List<YouTubeSearchList.SearchResult> disasterData) {
         return disasterData.parallelStream()
                 .map((disaster) -> RawDisasterData.builder()
                         .id(disaster.getId().getVideoId())
-                        .title(disaster.getSnippet().getTitle())
+                        .text(disaster.getSnippet().getTitle())
                         .description(disaster.getSnippet().getDescription())
                         .build())
                 .toList();
     }
 
     private List<ProcessedDisasterData> mapAIProcessedDataWithOriginal(
-            List<YouTubeSearchListResponseDTO.SearchResult> youtubeDisasterData,
+            List<YouTubeSearchList.SearchResult> youtubeDisasterData,
             List<AIProcessedDisaster> aiProcessedData
     ) {
         return youtubeDisasterData.parallelStream()
@@ -80,7 +87,7 @@ public class DisasterSchedulerServiceImpl implements DisasterSchedulerService {
                                 Video.builder()
                                         .title(disasterItem.getSnippet().getTitle())
                                         .userId(disasterItem.getSnippet().getChannelId())
-                                        .url("https://www.youtube.com/watch?v=" + disasterItem.getId().getVideoId())
+                                        .url("https://www.youtube.com/watch?v=" + disasterItem.getId())
                                         .thumbnail(disasterItem.getSnippet().getThumbnails().getMedium().getUrl())
                                         .description(disasterItem.getSnippet().getDescription())
                                         .publishedDate(Instant.parse(disasterItem.getSnippet().getPublishedAt()))
