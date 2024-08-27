@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Repository
 public interface DisasterRepository extends JpaRepository<Disaster, Long> {
@@ -35,5 +36,6 @@ public interface DisasterRepository extends JpaRepository<Disaster, Long> {
             @Param("endDate") Instant endDate
     );
 
-
+    @Query("SELECT d FROM Disaster d LEFT JOIN FETCH d.videos WHERE d.recordId IN :recordIds")
+    List<Disaster> findAllByRecordIdIn(@Param("recordIds") Set<String> recordIds);
 }
