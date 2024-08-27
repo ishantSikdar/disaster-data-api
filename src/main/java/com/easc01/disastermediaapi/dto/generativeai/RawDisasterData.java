@@ -14,7 +14,7 @@ public class RawDisasterData {
     private String id;
 
     @JsonProperty("text")
-    private String text;
+    private String title;
 
     @JsonProperty("description")
     private String description;

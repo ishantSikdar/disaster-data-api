@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @Slf4j
 @Service
@@ -27,6 +28,12 @@ public class GenerativeAIServiceImpl implements GenerativeAIService {
     private static final String url = "https://arbazkhan-cs-disaster-news-summary.hf.space/summarize";
 
     private final OkHttpClient client = new OkHttpClient();
+
+    {
+        client.setConnectTimeout(10, TimeUnit.MINUTES);  // Set connection timeout
+        client.setReadTimeout(10, TimeUnit.MINUTES);     // Set read timeout
+    }
+
 
     @Override
     public List<AIProcessedDisaster> processRawDisasterData(List<RawDisasterData> rawDisasterData) {

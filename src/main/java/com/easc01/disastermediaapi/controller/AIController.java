@@ -4,7 +4,6 @@ import com.easc01.disastermediaapi.constant.AppConstant;
 import com.easc01.disastermediaapi.dto.ApiResponse;
 import com.easc01.disastermediaapi.dto.generativeai.AIProcessedDisaster;
 import com.easc01.disastermediaapi.dto.generativeai.RawDisasterData;
-import com.easc01.disastermediaapi.dto.youtube.YouTubeSearchList;
 import com.easc01.disastermediaapi.service.GenerativeAIService;
 import com.easc01.disastermediaapi.util.IDUtil;
 import io.swagger.v3.oas.annotations.Hidden;
@@ -51,5 +50,4 @@ public class AIController {
         apiResponse.setTimestamp(Date.from(Instant.now()));
         return new ResponseEntity<>(apiResponse, apiResponse.getHttpStatus());
     }
-
 }

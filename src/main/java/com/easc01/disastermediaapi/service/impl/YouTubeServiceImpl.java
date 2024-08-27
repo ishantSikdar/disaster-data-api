@@ -71,7 +71,7 @@ public class YouTubeServiceImpl implements YouTubeService {
                 .toList();
 
         allDisastersOverview.setItems(detailedDisasters);
-        log.info("YouTube videos remains after lang filter: {}", allDisastersOverview.getItems().size());
+        log.info("YouTube videos remains after filters: {}", allDisastersOverview.getItems().size());
         return allDisastersOverview;
     }
 
@@ -86,7 +86,7 @@ public class YouTubeServiceImpl implements YouTubeService {
                 .queryParam("part", "snippet")
                 .queryParam("relevanceLanguage", "en")
                 .queryParam("safeSearch", "strict")
-                .queryParam("maxResults", "30")
+                .queryParam("maxResults", "15")
                 .queryParam("videoCategoryId", "25")
                 .queryParam("publishedAfter", publishedAfter)
                 .toUriString();

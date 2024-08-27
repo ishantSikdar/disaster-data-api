@@ -37,17 +37,20 @@ public class DisasterSchedulerServiceImpl implements DisasterSchedulerService {
             List<RawDisasterData> rawDisasterData = serializeYouTubeResults(youtubeDisasterData.getItems());
             log.info("Number of raw disasters scrapped: {}", rawDisasterData.size());
 
+            log.info("Processing Raw Disaster Data using AI...");
             // Step 2: AI procession
             List<AIProcessedDisaster> aiProcessedData = generativeAIService.processRawDisasterData(rawDisasterData);
             log.info("Number of raw disasters processed using AI: {}", aiProcessedData.size());
 
+            log.info("Mapping AI processed Data back to Original Disaster Data...");
             // sub step 2: map AI processed data with original data
             List<ProcessedDisasterData> mappedDisasterData = mapAIProcessedDataWithOriginal(youtubeDisasterData.getItems(), aiProcessedData);
             log.info("Number of processed mapped disasters remains: {}", mappedDisasterData.size());
 
+            log.info("Saving final Mapped Data...");
             // Step 3: Save mapped and processed disasters
             boolean success = saveProcessAndMappedDisasters(mappedDisasterData);
-            log.info("Status of saving last 15 minutes of disasters from youtube" + success);
+            log.info("Status of saving last 20 minutes of disasters from youtube, " + success);
 
         } catch (Exception e) {
             log.info("Something went wrong collecting disasters from youtube, {}", e.getMessage());
@@ -62,7 +65,7 @@ public class DisasterSchedulerServiceImpl implements DisasterSchedulerService {
         return disasterData.parallelStream()
                 .map((disaster) -> RawDisasterData.builder()
                         .id(disaster.getId().getVideoId())
-                        .text(disaster.getSnippet().getTitle())
+                        .title(disaster.getSnippet().getTitle())
                         .description(disaster.getSnippet().getDescription())
                         .build())
                 .toList();
@@ -128,19 +131,23 @@ public class DisasterSchedulerServiceImpl implements DisasterSchedulerService {
 
     private Disaster serializeDuplicateDisaster(ProcessedDisasterData mappedDisaster) {
         try {
+            log.info("Processing record id{} : ", mappedDisaster.getRecordId());
             Optional<Disaster> similarDisaster = disasterRepository.findByRecordId(mappedDisaster.getRecordId());
 
             if (similarDisaster.isEmpty()) {
-                return Disaster.builder()
+                Disaster newDisaster = Disaster.builder()
                         .recordId(mappedDisaster.getRecordId())
                         .title(mappedDisaster.getTitle())
                         .summary(mappedDisaster.getSummary())
                         .incidentLocation(mappedDisaster.getIncidentLocation())
-                        .incidentLocation(mappedDisaster.getIncidentLocation())
-                        .videos(mappedDisaster.getVideos())
+                        .incidentType(mappedDisaster.getIncidentType())
                         .build();
+                mappedDisaster.getVideos().forEach((video -> video.setDisaster(newDisaster)));
+                newDisaster.setVideos(mappedDisaster.getVideos());
+                return newDisaster;
 
             } else {
+                mappedDisaster.getVideos().forEach((video -> video.setDisaster(similarDisaster.get())));
                 similarDisaster.get().getVideos().addAll(mappedDisaster.getVideos());
                 return similarDisaster.get();
 
