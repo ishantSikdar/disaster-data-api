@@ -2,6 +2,7 @@ package com.easc01.disastermediaapi.controller;
 
 import com.easc01.disastermediaapi.constant.AppConstant;
 import com.easc01.disastermediaapi.dto.ApiResponse;
+import com.easc01.disastermediaapi.dto.disaster.ScrapResponse;
 import com.easc01.disastermediaapi.service.DisasterSchedulerService;
 import com.easc01.disastermediaapi.util.IDUtil;
 import io.swagger.v3.oas.annotations.Hidden;
@@ -27,15 +28,19 @@ public class SchedulerController {
     private final DisasterSchedulerService disasterSchedulerService;
 
     @PostMapping(AppConstant.DISASTER)
-    public ResponseEntity<ApiResponse<Double>> scrapDisasters() {
-        ApiResponse<Double> apiResponse = new ApiResponse<>();
+    public ResponseEntity<ApiResponse<ScrapResponse>> scrapDisasters() {
+        ApiResponse<ScrapResponse> apiResponse = new ApiResponse<>();
         apiResponse.setRequestId(String.valueOf(IDUtil.generateHttpRequestId()));
 
         try {
-            apiResponse.setData(disasterSchedulerService.collectAndSaveDisastersFromYouTube());
+            Object[] res = disasterSchedulerService.collectAndSaveDisastersFromYouTube();
+            apiResponse.setData(ScrapResponse.builder()
+                    .message("Status: " + res[0])
+                    .timeTaken("Seconds: " + res[1])
+                    .build());
             apiResponse.setHttpStatus(HttpStatus.OK);
             apiResponse.setMessage("Data scrapped successfully");
-            log.error("Scrapped disaster data successfully");
+            log.info("Scrapped disaster data successfully");
 
         } catch (Exception e) {
             apiResponse.setMessage("Failed to scrap data");

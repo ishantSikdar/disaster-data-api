@@ -28,7 +28,7 @@ public class DisasterSchedulerServiceImpl implements DisasterSchedulerService {
     private final DisasterRepository disasterRepository;
 
     @Override
-    public double collectAndSaveDisastersFromYouTube() {
+    public Object[] collectAndSaveDisastersFromYouTube() {
         long startTime = System.currentTimeMillis();
 
         try {
@@ -53,12 +53,13 @@ public class DisasterSchedulerServiceImpl implements DisasterSchedulerService {
             boolean success = saveProcessAndMappedDisasters(mappedDisasterData);
             log.info("Status of saving last 20 minutes of disasters from YouTube: {}", success);
 
+            return new Object[] { success, (double) (System.currentTimeMillis() - startTime) / 1000 };
+
         } catch (Exception e) {
             log.error("Something went wrong collecting disasters from YouTube: {}", e.getMessage());
             throw e;
         }
 
-        return (double) (System.currentTimeMillis() - startTime) / 1000;
     }
 
     private List<RawDisasterData> serializeYouTubeResults(List<YouTubeSearchList.SearchResult> disasterData) {
